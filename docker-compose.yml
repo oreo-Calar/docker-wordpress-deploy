@@ -37,7 +37,6 @@ services:
       WORDPRESS_CONFIG_EXTRA: |                          # 通过环境变量注入额外的 PHP 配置代码
         define('WP_SITEURL', '${SITE_URL}');             # 强制站点 URL
         define('WP_HOME', '${SITE_URL}');                # 强制首页 URL
-        define('WPLANG', 'zh_CN');                       # 启用中文界面
   # 数据卷挂载
     volumes:
       - wp_data:/var/www/html                     # 持久化 WordPress 程序文件、插件、主题、上传内容
@@ -46,6 +45,9 @@ services:
     depends_on:                                   # 依赖关系，控制启动顺序
       db:
         condition: service_healthy                # 等待 db 容器健康检查通过后才启动 WordPress
+    dns:
+      - 8.8.8.8
+      - 114.114.114.114                           # 强制容器使用公共 DNS，避免宿主机 DNS 异常导致 WordPress 无法访问外部 API
 
   # ===========Nginx反向代理服务=============
   nginx:
