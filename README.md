@@ -18,8 +18,8 @@
 - [Docker](https://docs.docker.com/engine/install/) 20.10+
 - [Docker Compose](https://docs.docker.com/compose/install/) 2.0+（支持 `docker compose` 命令）
 - 确保 **8080 端口**未被占用（如需修改，请编辑 `docker-compose.yml` 中 nginx 服务的 `ports` 字段）
-- 虚拟机/服务器需能访问外网（用于下载语言包和插件）。  
-  *若使用仅主机模式，请改用 NAT 或桥接模式。*
+- 虚拟机/服务器需能正常解析外网域名（用于下载语言包和插件）。
+- 若 DNS 解析失败，可在 `docker-compose.yml` 中为服务显式配置 `dns`（如 `8.8.8.8`）。
 
 ### 2. 克隆项目
 
